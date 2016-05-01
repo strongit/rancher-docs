@@ -3,11 +3,11 @@
 
 API有可以从web浏览器访问的用户接口。这是查看资源，执行动作，以及查看等价于cURL命令执行的HTTP请求&回应。点击**API**来获得URL endpoint来访问API。
 
-![User menu]({{site.baseurl}}/api/apikeys.png)
+![User menu](/images/apikeys.png)
 
 点击端点链接：
 
-![Endpoint link]({{site.baseurl}}/images/api_endpoint.png)
+![Endpoint link](/images/api_endpoint.png)
 
 ## 术语
 ---
