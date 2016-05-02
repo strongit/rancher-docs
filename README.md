@@ -6,7 +6,7 @@ Rancher 是非常优秀的容器管理平台，本书旨在沉淀和积累相关
 
 本书在线访问网址：http://rancher.hidocker.io   
 
-本书的初始化版本，保持了和 Rancher 文档官网同步的目录结构（为了维护方便，RancherOS 被当做一个独立章节纳入了本书）；为了方便您的翻译，请建议直接下载 https://github.com/rancher/rancher.github.io 英文源站到本地（作为英文原文的离线参考），然后再 Forke 下载本书电子书源码 https://github.com/martinliu/rancher-docs 到本地，您会看到本书的很多章节还都是空白文章；然后您就可以可以开始工作了。本书的第一个阶段性目标是：对官方英文文档做 1：1的翻译。然后是收集各位高手的原创好文。目标是打造出一份很实用和全面的参考资料库。
+本书的初始化版本，保持了和 Rancher 文档官网同步的目录结构（为了维护方便，RancherOS 被当做一个独立章节纳入了本书）；为了方便您的翻译，请建议直接下载 https://github.com/rancher/rancher.github.io 英文源站到本地（作为英文原文的离线参考）；然后再 Fork https://github.com/martinliu/rancher-docs 到自己的仓库，并从自己的仓库下载本书电子书源码到本地，您会看到本书的很多章节还都是空白文章；然后您就可以可以开始工作了。本书的第一个阶段性目标是：对官方英文文档做 1：1的翻译。然后是收集各位高手的原创好文。目标是打造出一份很实用和全面的参考资料库。
 
 如果你没有 GitHub 的使用经验，请查看这个视频，否则忽略此段，继续仔细阅读本网页；视频会教会您纯网页版的操作和协作流程，其中示例了如何把 6.1 访问控制 做英文原文的初始化，和翻译提交。视频点这里。[http://v.youku.com/v_show/id_XMTU1NDk4Mzc2OA](http://v.youku.com/v_show/id_XMTU1NDk4Mzc2OA)
 
