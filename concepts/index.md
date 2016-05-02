@@ -2,115 +2,116 @@
 
 在本章节，我们将介绍Rancher的基本概念。在使用Rancher之前，我们建议你对这些概念应该非常熟悉。  
 
-### 用户
+## 用户
 
 “用户”定义了什么角色在一个环境里能够拥有查看或管理Rancher资源的权限。Rancher缺省会允许单一租户的访问权限，当然，管理员可以定义多个用户的访问权限。 
 
-在你激活鉴权（authenticaiton）之前，可参照 [access control]({{site.baseurl}}/configuration/access-control.html)  .
+在你激活鉴权（authenticaiton）之前，可参照 [访问控制]({{site.baseurl}}/configuration/access-control.html)  .
 
 
-### Environments
+## 环境
 
-All hosts and any Rancher resources, such as containers, load balancers, and so on are created in and belong to an environment.  Access control permissions for viewing and managing these resources are then defined by the owner of the environment.  Rancher currently supports the capability for each user to manage and invite other users to their environment and allows for the ability to create multiple environments for different workloads.  For example, you may want to create a "dev" environment and a separate "production" environment with its own set of resources and limited user access for your application deployment.
+所有的主机和任意的Rancher资源，例如容器、负载均衡器等，都创建并归属于一个环境。 用户对这些资源查看和管理的权限，由环境的拥有者来定义。Rancher目前支持每个用户来管理和邀请其它用户进入他的环境，并且能够为多种工作负载来定义不同的环境。 例如，你可以创建一个“Dev”环境， 另外再创建一个隔离的“生产”环境，每个环境里定义不同的资源，从而限制不同用户对不同环境的访问权限。 
 
-Set up [access control]({{site.baseurl}}/rancher/configuration/access-control/) before you [share environments]({{site.baseurl}}/rancher/configuration/environments/) with users. 
+在你希望和其它用户[共享环境]({{site.baseurl}}/configuration/environments.html/) 之前，请设置[访问控制]({{site.baseurl}}/configuration/access-control.html/)。
 
 <a id="host"></a>
 
-### Hosts
+## 主机
 
-Hosts are the most basic unit of resource within Rancher and is represented as any Linux server, virtual or physical, with the following minimum requirements:
+在rancher环境里，主机是一个最基本的资源单元，可以是任意的虚拟或物理的Linux服务器，对这些服务器的要求如下:
 
-* Any modern Linux distribution that supports Docker 1.10.3.
-* Ability to communicate with a Rancher server via http or https through the pre-configured port. Default is 8080.
-* Ability to be routed to any other hosts under the same environment to leverage Rancher's cross-host networking for Docker containers.
+* 任意的Linux 发行版，只要它支持Docker 1.10.3。
+* 能够和Rancher服务器通过预定义的端口号，一般是8080， 以http或https的协议进行通讯。 
+* 和同环境里的其它主机路由可达，从而能够利用Rancher的跨节点网络进行通讯。
 
-Rancher also supports Docker Machine and allows you to add your host via any of its supported drivers.
+Rancher也支持Docker Machine命令，从而允许你通过任意Rancher支持的接口来添加主机。 
 
-See [add your first host]({{site.baseurl}}/rancher/rancher-ui/infrastructure/hosts) before adding your first host to Rancher.
+在Rancher环境里添加主机操作之前，可参考[添加第一台主机]({{site.baseurl}}/rancher-ui/infrastructure/hosts.html)。
 
-### Networking
+## 网络
 
-Rancher supports cross-host container communication by implementing a simple and secure overlay network using IPsec tunneling.  To leverage this capability, a container launched through Rancher must select "Managed" for its network mode or if launched through Docker, provide an extra label "--label io.rancher.container.network=true".  Most of Rancher's network features, such as load balancer or DNS service, require the container to be in the managed network.
+Rancher通过使用IPsec隧道技术，构建了一个简单和安全的覆盖（Overlay）网络，来支持跨主机节点的容器通讯。如果希望使用该网络，容器在通过Rancher启动时，必须将其网络模式设为“Managed”，或着在Docker命令行启动时，提供额外的标签 "--label io.rancher.container.network=true"。大多数的Rancher网络功能，例如负载均衡或DNS服务，都需要容器设为“Managed”网络模式。 
 
-Under Rancher's network, a container will be assigned both a Docker bridge IP (172.17.0.0/16) and a Rancher managed IP (10.42.0.0/16) on the default docker0 bridge.  Containers within the same environment are then routable and reachable via the managed network.
+在Rancher网络里， 一个容器将被分配一个Docker的桥接IP地址(172.17.0.0/16) 和一个Rancher管理的IP地址 (10.42.0.0/16) ，该地址配置在缺省的docker0桥上.  通过这样的设置， 在同一个环境里的所有容器将都能够通过“managed”网络实现路由可达和互相访问。
 
-**_Note:_** _The Rancher managed IP address will not be present in Docker meta-data and as such will not appear in the result of a Docker "inspect." This sometimes causes incompatibilities with certain tools that require a Docker bridge IP. We are already working with the Docker community to make sure a future version of Docker can handle overlay networks more cleanly._
+**_备注:_** _Rancher的管理IP地址在Docker meta-data
+里是不存在的，所以通过Docker的“inspect”指令是看不到的。有些时候这一点可能会和一些需要Docker桥接IP地址的工具不兼容。我们正在和Docker社区共同合作，确保Docker的未来版本更清晰地支持Overlay网络。 
 
-### Service Discovery
+## 服务发现
 
-Rancher adopts the standard Docker Compose terminology for services and defines a basic service as one or more containers created from the same Docker image.  Once a service (consumer) is linked to another service (producer) within the same stack, a DNS record mapped to each container instance is automatically created and discoverable by containers from the "consuming" service.  Other benefits of creating a service under Rancher include:
+Rancher采用标准的Docker Compose规范来描述服务，一个或多个来自于同一个Docker镜像的容器可被定义为一个基本服务。在同一个应用栈里，当一个服务（消费者）被链接到另外一个服务（生产者）时，会自动产生一条DNS记录，来匹配每个容器的实例。该记录使得服务（生产者）能够被访问到。在Rancher中创建服务的其它益处包括： 
 
-* Service High Availability (HA) - the ability to have Rancher automatically monitor container states and maintain a service's desired scale.
-* Health Monitoring - the ability to set basic monitoring thresholds for container health.
-* Add Load Balancers - the ability to add a simple load balancer for your services using HAProxy.
-* Add External Services - the ability to add any-IP as a service to be discovered.
-* Add Service Alias - the ability to add a DNS record for your services to be discovered.
+* 服务高可用 (HA) - 可以使Rancher来自动监控容器的状态，从而确保服务内的启动的容器维持在预定的数量。
+* 健康检查 - 设定阈值，来监控容器的健康状况。 
+* 添加负载均衡器 - 为服务添加一个基本的负载均衡器，该负载均衡器使用HAProxy。
+* 添加外部服务 - 可以添加任意的IP地址做为可以使用和访问到的服务。 
+* 添加服务别名 - 可以添加一条DNS记录，使得服务可以被访问到。 
 
-For more information, see [adding services]({{site.baseurl}}/rancher/rancher-ui/applications/stacks/adding-services/), [adding load balancers]({{site.baseurl}}/rancher/rancher-ui/applications/stacks/adding-balancers/), [adding external services]({{site.baseurl}}/rancher/rancher-ui/applications/stacks/adding-external-services/) or [adding service alias]({{site.baseurl}}/rancher/rancher-ui/applications/stacks/adding-service-alias/).
+更多信息，请参考 [添加服务]({{site.baseurl}}/rancher-ui/applications/stacks/adding-services.html/), [添加负载均衡器]({{site.baseurl}}/rancher-ui/applications/stacks/adding-balancers.html/), [添加外部服务]({{site.baseurl}}/rancher-ui/applications/stacks/adding-external-services.html/) 或者 [添加服务别名]({{site.baseurl}}/rancher-ui/applications/stacks/adding-service-alias.html/).
 
-### Load Balancer
+## 负载均衡器
 
-Rancher implements a managed load balancer using HAProxy that can be manually scaled to multiple hosts.  A load balancer can be used to distribute network and application traffic to individual containers by directly adding them or "linked" to a basic service.  A basic service that is "linked" will have all its underlying containers automatically registered as load balancer targets by Rancher.
+Rancher使用HAProxy来构建一个被管理的负载均衡器，该负载均衡可以被定义部署到多台主机上。一个负载均衡器可用来将网络和应用流量分配到多个单个容器里，只需要将这些容器添加到与负载均衡器相链接到服务里。 这个链接到负载均衡器的服务，可以由Rancher自动注册为负载均衡的目标服务。 
 
-### Distributed DNS Service
+## 分布式DNS服务 
 
-Rancher implements a distributed DNS service by using its own light-weight DNS server coupled with a highly available control plane. Each healthy container is automatically added to the DNS service when linked to another service or added to a Service Alias. When queried by the service name, the DNS service returns a randomized list of IP addresses of the healthy containers implementing that service.
+Rancher本身内置具备高可用控制引擎的轻量级DNS服务，利用该服务，Rancher构建了一个分布式DNS服务。每个健康的容器被链接到一个服务或者被添加到一个服务别名的时候，该容器会被自动添加到DNS记录里的该服务中。当查询该服务名时，DNS服务会返回该服务中所有容器的随机IP列表。
 
-* By default, all services within the same stack are added to the DNS service without requiring explicit links. 
-    * You can resolve containers within the same stacks by the service names. 
-    * If you need a custom DNS name for your service, that is different from your service name, you will be required to use a link to get the custom DNS name. 
-    * Links are still required for load balancers to target services. 
-    * Links are still required if a Service Alias is used. 
-* To make services resolvable that are in different stacks, you will need to link them explicitly. 
+* 缺省情况下, 在同一应用栈里的所有服务不需要显式的链接定义，就会被添加到DNS服务中。  
+    * 你可以通过服务名称来解析同一应用栈的容器地址。  
+    * 如果你的服务需要一个自定义的DNS名称，该名称与原服务名称不同，你将需要一个链接来得到这个自定义的DNS名称。  
+    * 对负载均衡来说，仍旧需要链接定义才能访问到目标服务。 
+    * 如果定义了服务别名，链接就仍旧时必须定义的。  
+* 如果想使得在不同应用栈的服务可以被解析，你需要显式地定义链接。 
 
-Because Rancher’s overlay networking provides each container with a distinct IP address, you do not need to deal with port mappings and do not need to handle situations like duplicated services listening on different ports. As a result, a simple DNS service is adequate for handling service discovery.
+因为Rancher的覆盖（overlay）网络为每个容器定义了一个明确的IP地址，你不需要再操心处理端口映射，也不需要处理类似同一服务下的容器使用不同的端口这样的复杂情况。这样，利用一个基本的DNS服务就足可以实现服务发现。  
 
-### Health Checks
+## 健康检查
 
-Rancher implements a health monitoring system by running managed network agent’s across it’s hosts to co-ordinate the distributed health checking of containers and services. These network agents internally utilize HAProxy to validate the health status of your applications. When health checks are enabled either on an individual container or a service, each container is then monitored by up to three network agents running on hosts separate to that containers parent host. The container is considered healthy if at least one HAProxy instance reports a “passed” health check.
+Rancher构建了一个完善的容器健康状况监测系统。该系统通过在多个主机上运行的网络代理，来实施对容器和服务的分布式健康状况检查。这些网络代理使用内置的HAProxy来验证应用的健康状态。当一个容器或一个服务定义了健康检查时，每个容器就会被最多三个网络代理程序来监控，这些网络代理程序运行在不同于该容器父节点的其它三个物理节点上。只有当至少一个HAProxy的实例表明健康检查“通过”时，该容器才会被认为是健康的。  
 
-> **Note:** The only exception to this model is when your environment contains a single host. In such instances the health checks will be performed by the same host.
+> **备注:** 一个例外情况是，当你的环境里只包含了一个单一的主机时，健康检查就会被同一个主机节点上的网络代理来执行。 
 
-Rancher handles network partitions and is more efficient than client-based health checks. By using HAProxy to perform health checks, Rancher enables users to specify the same health check policy across applications and load balancers.
+Rancher的去中心化的健康检查模式比客户端模式要有效得多，另外，使用HAProxy来进行健康检查，那些原先只能在负载均衡器定义的应用级别负载均衡策略，都可以在服务里进行定义，从而实现在各层次上去监控应用和服务的健康状况。  
 
-For more information such as including example failure scenarios and how Rancher displays services, see [Health Checks]({{site.baseurl}}/rancher/rancher-services/health-checks/). You can also read more about setting up health checks by using [rancher-compose]({{site.baseurl}}/rancher/rancher-compose/rancher-services/#health-check-for-services) or in the [UI]({{site.baseurl}}/rancher/rancher-ui/applications/stacks/adding-services/#health-checks).
+更多信息，例如健康检查失败的不同场景以及Rancher如何显示服务，请参考 [健康检查]({{site.baseurl}}／rancher-services/health-checks.html/). 你也可以获取更多信息关于如何通过使用 [rancher-compose]({{site.baseurl}}/rancher-compose/rancher-services/#health-check-for-services.html) 或 在[UI]({{site.baseurl}}/rancher-ui/applications/stacks/adding-services/#health-checks.html)里来设置健康检查.
 
-### Service HA
+## 服务高可用
 
-Rancher constantly monitors the state of your containers within a service and actively manages to ensure the desired scale of the service.  This can be triggered when there are fewer (or even more) healthy containers than the desired scale of your service, a host becomes unavailable, a container fails, or is unable to meet a health check.
+Rancher会持续地监控服务里容器的状态，并且主动地进行管理，确保服务保持在期望的规模。当健康的容器数量比服务里原先定义的数量少（或者甚至多）的情况下，系统会自动触发动作，启动（或关闭）容器。 通常这种情况是由于一个节点不可用，一个容器失败或者容器／服务没有通过健康检查。
 
-### Service Upgrade
+## 服务升级
 
-Rancher supports the notion of service upgrades by allowing users to either load balance or apply a service alias for a given service.  By leveraging either Rancher features, it creates a static destination for existing workloads that require that service.  Once this is established, the underlying service can be cloned from Rancher as a new service, validated through isolated testing, and added to either the load balancer or service alias when ready.  The existing service can be removed when obsolete. Subsequently, all the network or application traffic are automatically distributed to the new service.
+Rancher支持服务的部分（notion）升级，该功能是通过允许用户为某个给定的服务来使用负载均衡或者应用服务别名来实现的。这两种方式，都可以为需要该服务的现有负载关键一个静态的目标。一旦该设定建立，某个底层的服务可以被Clone为一个新服务，通过隔离的测试来进行校验，当就绪时，通过负载均衡或者定义服务别名的方式加入到应用栈。 而原有到服务当废弃时可以在系统中删除。最终，所有的网络或应用流量都将被分流到新的服务。  
 
-### Rancher Compose
+## Rancher Compose
 
-Rancher implements and ships a command-line tool called rancher-compose that is modeled after docker-compose. It takes in the same docker-compose.yml templates and deploys the Stacks onto Rancher. The rancher-compose tool additionally takes in a rancher-compose.yml file which extends docker-compose.yml to allow specifications of attributes such as scale, load balancing rules, health check policies, and external links not yet currently supported by docker-compose.
+Rancher实施和发布了一个命令行工具，该工具称为“rancher-compose”，与docker-compose的命名类似. 该工具可以引用同样的docker-compose.yml模版将应用栈在Rancher中部署。Rancher-compose的工具还支持rancher-compose.yml文件，该文件扩展了docker-compose.yml的定义，允许定义更多的属性，如容器规模, 负载均衡策略，健康检查策略以及外部链接等，这些定义目前在docker-compose里还不能定义.
 
-For more information, see [rancher-compose]({{site.baseurl}}/rancher/rancher-compose/).
+更多信息, 请参见 [rancher-compose]({{site.baseurl}}/rancher-compose.html/).
 
-### Stacks
+## 应用栈（Stacks）
 
-A Rancher stack mirrors the same concept as a docker-compose project.  It represents a group of services that make up a typical application or workload.
+Rancher应用栈与docker－compose所定义的项目概念类似。 它代表着一组服务，来构成一个典型的应用或工作负载。  
 
-### Container Scheduling
+## 容器调度
 
-Rancher supports container scheduling policies that are modeled closely after Docker Swarm.  They include scheduling based on:
+Rancher支持容器调度策略，采用与Docker Swarm兼容的模型。 包括如下策略： 
 
-* port conflicts
-* shared volumes
-* host tagging
-* shared network stack: --net=container:dependency
-* strict and soft affinity/anti-affinity rules by using both env var (Swarm) and labels (Rancher)
+* 端口冲突 
+* 共享存储卷 
+* 主机标签
+* 共享网络栈: --net=container:dependency
+* 严格的和软性定义的亲和／反－亲和规则，这些规则通过使用env变量(Swarm)和 label(Rancher)来定义。
 
-In addition, Rancher supports scheduling service triggers that allow users to specify rules, such as on "host add" or "host label", to automatically scale services onto hosts with specific labels.
+另外， Rancher支持调度服务触发器，允许用户定义特定的规则，如“添加主机”或“主机标签” ，从而实现自动地将服务扩展到具有特定标签到主机上。  
 
-For more information on how to schedule containers in Rancher, see how we use [labels and scheduling rules in the UI]({{site.baseurl}}/rancher/rancher-ui/scheduling/) or how we use [labels in rancher-compose]({{site.baseurl}}/rancher/rancher-compose/scheduling/).
+关于如何调度容器到更多信息，请参考如何使用[UI的labels 和 调度规则]({{site.baseurl}}/rancher-ui/scheduling.html/) 或者如何使用[labels in rancher-compose]({{site.baseurl}}/rancher-compose/scheduling.html/).
 
-### Sidekicks
+## Sidekicks
 
-Rancher supports the colocation, scheduling, and lock step scaling of a set of services by allowing users to group these services by using the notion of sidekicks.  A service with one or more sidekicks is typically created to support shared volumes (i.e. `--volumes_from`) and networking (i.e. `--net=container`) between containers.
+Rancher允许用户通过定义Sidekicks来定义一组容器，这组容器总是运行在同一主机节点上、同时被调度以及同时被伸缩。 一个服务拥有一个或多个sidekick容器，一个典型的例子是用来在多个容器里支持存储卷 (即`--volumes_from`) 和网络 (即 `--net=container`) 的定义.
 
-For more information, see [sidekicks with rancher-compose]({{site.baseurl}}/rancher/rancher-compose/#sidekicks).
+更多信息, 请参考[sidekicks with rancher-compose]({{site.baseurl}}/rancher-compose/#sidekicks.html).
 
