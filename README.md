@@ -49,7 +49,7 @@ $ git config user.email "your email"
 修改代码后提交，并推送到自己的仓库。
 
 ```
-$ #do some change on the content 修改您参与的文章
+$ #do some change on the content 编辑您参与的文章
 $ git commit -am "Fix issue #1: change helo to hello"
 $ git push
 
