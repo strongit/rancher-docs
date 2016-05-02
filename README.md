@@ -12,6 +12,8 @@ Rancher 是非常优秀的容器管理平台，本书旨在沉淀和积累相关
 
 <iframe height=498 width=510 src="http://player.youku.com/embed/XMTU1NDk4Mzc2OA==" frameborder=0 allowfullscreen></iframe>
 
+Github 是一个协作的平台，pull request 是解决冲突的方式，你提交的 pull request 上来以后，如果有冲突，在这种情况下电子书源码的管理员需要解决这个冲突，从两个冲突的 pull request 中选择出一个更好的。为了快速响应所有文档参与者的贡献，现在征召电子书源码仓库管理员合作者（Collaborators）；如果您提交的 PR 被三次接受，你就可以申请成为 Collaborators ；请发一个 Issue 做出申请，没有人反对的话，2天内就不会成为 Collaborators。
+
 ## 贡献者
 本书源码开源托管在Github，欢迎参与维护：https://github.com/martinliu/rancher-docs， 贡献者名单见[ GitHub contributors](https://github.com/martinliu/rancher-docs/graphs/contributors) 页面。
 
