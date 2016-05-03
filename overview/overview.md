@@ -53,3 +53,5 @@ Rancher 的主要功能如下的示意图，它可以被运行在任何云上，
  [升级 Rancher]({{site.baseurl}}/upgrading/) 是很重要的一章，如果您在生产环境中运行 Rancher。
 
  [为Rancher做贡献]({{site.baseurl}}/contributing/) 这一章包含了如何参与 Rancher 开源社区的信息。
+ 
+ Rancher OS 完整的这种定制版容器操作系统的安装、配置和使用，在英文原始文档中和本文为平行的一份文档。为了翻译协作和使用的方便性，目前把它收录为本书的一个章节。
