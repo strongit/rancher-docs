@@ -1,6 +1,6 @@
 # 使用 Rancher-Compose
 
-Jitao Hou 正在编辑首稿，欢迎之后Review
+Jitao Hou 正在翻译首稿，欢迎之后Review
 
 The `rancher-compose` tool is like a multi-host version of `docker-compose`. It operates within the scope of a [stack]({{site.baseurl}}/rancher/rancher-ui/applications/stacks/) in the Rancher UI, which belongs to one [environment]({{site.baseurl}}/rancher/configuration/access-control/) and has many [hosts]({{site.baseurl}}/rancher/rancher-ui/infrastructure/hosts/). The containers started by `rancher-compose` will be deployed on any of the hosts in the environment that satisfy the [scheduling rules]({{site.baseurl}}/rancher/rancher-compose/scheduling/). If there are no scheduling rules, then the containers of the service are launched on the hosts with the fewest containers. These containers are launched just as if you had started a service in the UI as rancher-compose is making the same API calls. 
 
