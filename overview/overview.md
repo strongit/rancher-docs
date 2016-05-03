@@ -34,22 +34,22 @@ Rancher 产品的关键功能包括：
 2. Users can interact with Rancher using a command-line tool called `rancher-compose`. The `rancher-compose` tool enables users to stand up multiple containers and services based on the Docker Compose templates on Rancher infrastructure. The `rancher-compose` tool supports the standard `docker-compose.yml` file format. An optional `rancher-compose.yml` file can be used to extend and overwrite service definitions in `docker-compose.yml`.
 3. Users can interact with Rancher using the Rancher UI. Rancher UI is required for one-time configuration tasks such as setting up access control, managing environments, and adding Docker registries. Rancher UI additionally provides a simple and intuitive experience for managing infrastructure and services.
 
-The following figure illustrates Rancher's major features, its ability to run any clouds, and the three primary ways to interact with Rancher.
+Rancher 的主要功能如下的示意图，它可以被运行在任何云上，并且有三种方式与之交互。
 
 <img src="{{site.baseurl}}/images/rancher_overview.png" width="800" alt="Rancher Overview">
 
 ### 本文档的线索
 
-It is easy to get Rancher up and running. If you have access to a Linux VM on your laptop or in a cloud, go to the [Quick Start Guide]({{site.baseurl}}/rancher/quick-start-guide/) to get started right away.
+把 Rancher 运行起来是比较容易的。如果您有一个 Linux 虚拟机在笔记本上或者云主机，阅读  [快速安装指南]({{site.baseurl}}/QuickStartGuide/) 迅速获得第一手实战经验。
 
-If you are ready to set up a production-grade Rancher installation, follow the instructions in the [Installing Rancher]({{site.baseurl}}/rancher/installing-rancher/installing-server/) to setup a Rancher server and add hosts into the Rancher installation.
+如果您想安装一套生产级别的 Rancher 环境，请按照  [Rancher 安装]({{site.baseurl}}/Installing-Rancher/Single-Node/) 这一章的指导，来部署配置 Rancher 服务器并添加节点进来。
 
-Before you start using Rancher, make sure to read through the [Concepts]({{site.baseurl}}/rancher/concepts/) section to understand how Rancher works.
+在您开始使用 Rancher 之前，请一定阅读 [基本概念]({{site.baseurl}}/concepts/) 这一节，以了解 Rancher 是如何工作的。
 
-The Configuration section documents how you perform various one-time tasks after you complete installation of Rancher and start using Rancher.
+系统配置这一章描述了大量 Rancher 服务器部署和运行之后，如何做各种必要的一次性配置工作。
 
-The next three sections--[Using Rancher Through Native Docker CLI]({{site.baseurl}}/rancher/native-docker/), [Rancher Compose]({{site.baseurl}}/rancher/rancher-compose), and [Rancher UI]({{site.baseurl}}/rancher/rancher-ui/applications/stacks/adding-services/)--covers three primary ways you can consume Rancher features.
+这三章 --[使用 Docker 原生命令行]({{site.baseurl}}/rancher/native-docker/), [使用 Rancher Compose]({{site.baseurl}}/rancher/rancher-compose), 和 [Rancher 图形界面]({{site.baseurl}}/rancher/rancher-ui/applications/stacks/adding-services/)-- 描述了使用 Rancher 功能的三种主要方式。
 
-The [Upgrading Rancher]({{site.baseurl}}/rancher/upgrading) section is essential if you run Rancher in production.
+ [升级 Rancher]({{site.baseurl}}/upgrading/) 是很重要的一章，如果您在生产环境中运行 Rancher。
 
-The [Contributing to Rancher]({{site.baseurl}}/rancher/contributing) section contains information on how you can participate in the Rancher open source community.
+ [为Rancher做贡献]({{site.baseurl}}/contributing/) 这一章包含了如何参与 Rancher 开源社区的信息。
