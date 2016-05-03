@@ -35,7 +35,7 @@ Rancher 的主要功能如下的示意图，它可以被运行在任何云上，
 <img src="{{site.baseurl}}/images/rancher_overview.png" width="800" alt="Rancher Overview">
 
 ### 本文档的线索
-把 Rancher 运行起来是比较容易的。如果您有一个 Linux 虚拟机在笔记本上或者云主机，阅读  [快速安装指南]({{site.baseurl}}/QuickStartGuide/) 迅速获得第一手实战经验。
+把 Rancher 运行起来是比较容易的。如果您有一个 Linux 虚拟机在笔记本上或者云主机，阅读  [快速安装指南]({{site.baseurl}}/QuickStartGuide/qsg/) 迅速获得第一手实战经验。
 
 如果您想安装一套生产级别的 Rancher 环境，请按照  [Rancher 安装]({{site.baseurl}}/Installing-Rancher/Single-Node/) 这一章的指导，来部署配置 Rancher 服务器并添加节点进来。
 
