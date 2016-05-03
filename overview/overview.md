@@ -1,13 +1,10 @@
 ## Rancher 概述
----
 Rancher 是以在生产环境中运行容器为目标而构建的开源软件平台。随着 Docker 容器这种类型的应用工作负载的逐渐流行，它催生了很多与之相应的基础架构服务，如网络服务、存储服务、负载均衡，安全，服务发现和资源管理。
 
 ### 计算资源
-
 Rancher 使用的是来自于公有云或私有云上 Linux 主机的裸计算资源。每一个 Linux 主机既可以是虚拟机，也可以是物理机。Rancher 对每一个主机的期望不会多于 CPU，内存，磁盘存储和网络连接。从 Rancher 的角度看来，一个来自云服务商的云主机和私有数据中心的物理机是没多大差异。
 
 ### 关键功能
-
 Rancher 产品的关键功能包括： 
 
 1. 扩主机网络： Rancher 为每个环境生成一个软件定义网络，为扩主机和云的容器之间提供了安全的网络通讯。
@@ -27,19 +24,17 @@ Rancher 产品的关键功能包括：
 8. 多编排引擎支持：Rancher 用户在创建环境的时候，可以为他们的容器选择不同的容器编排引擎，默认是 Cattle，或者是 Kubernets 和 Docker Swarm。这让用户可以选择任意市场领先的调度框架的同时，依然能利用到Ranher 的其它所有功能，如：应用商店/目录，企业级用户管理，容器网络，和存储技术。
 
 ### 主要使用接口
-
 用户有三种方式和 Rancher 交互：
 
 1. 用户可以使用原生 Docker CLI 命令行或者 API 接口操作 Rancher 。Rancher 并不是其它那种把原生 Docker 体验给遮盖掉的编排系统或者管理系统。随着 Docker 平台不断地发展，封装层很可能会给原生的 Docker 功能给替代。而 Rancher 是在后台中工作，这样用户可以继续使用原生的 Dcoker CLI 和 Docker Compose 模板。Rancher 通过原生 Docker CLI 来用 Docker 标签的方式传递更多的信息，标签功能是 Rancher Labs贡献到 Docker 1.6中的功能。因为 Rancher 支持原生的 Docker CLI 和 API，像 Kubernets 这样第三方的工具可以在 Rancher 自如的使用。
-2. Users can interact with Rancher using a command-line tool called `rancher-compose`. The `rancher-compose` tool enables users to stand up multiple containers and services based on the Docker Compose templates on Rancher infrastructure. The `rancher-compose` tool supports the standard `docker-compose.yml` file format. An optional `rancher-compose.yml` file can be used to extend and overwrite service definitions in `docker-compose.yml`.
-3. Users can interact with Rancher using the Rancher UI. Rancher UI is required for one-time configuration tasks such as setting up access control, managing environments, and adding Docker registries. Rancher UI additionally provides a simple and intuitive experience for managing infrastructure and services.
+2. 用户可以通过叫做 `rancher-compose` 的命令行工具和 rancher 交互。 `rancher-compose` 工具可以让用户基于 Docker Compose 模板在 Rancher 服务器上启动一套多容器和服务的应用。 `rancher-compose` 工具支持标准的 `docker-compose.yml` 文件格式。一个可选的 `rancher-compose.yml` 文件可以用来基于  `docker-compose.yml` 定义扩展或者覆盖原有的定义。
+3. 用户还可以使用 Rancher 的图形界面来操作。Rancher图形界面可以完成很多配置工作，如配置访问控制权限，管理环境，添加 Docker 镜像库等。另外它为管理容器基础架构和服务提供了简单易用的用户体验。
 
 Rancher 的主要功能如下的示意图，它可以被运行在任何云上，并且有三种方式与之交互。
 
 <img src="{{site.baseurl}}/images/rancher_overview.png" width="800" alt="Rancher Overview">
 
 ### 本文档的线索
-
 把 Rancher 运行起来是比较容易的。如果您有一个 Linux 虚拟机在笔记本上或者云主机，阅读  [快速安装指南]({{site.baseurl}}/QuickStartGuide/) 迅速获得第一手实战经验。
 
 如果您想安装一套生产级别的 Rancher 环境，请按照  [Rancher 安装]({{site.baseurl}}/Installing-Rancher/Single-Node/) 这一章的指导，来部署配置 Rancher 服务器并添加节点进来。
@@ -50,8 +45,8 @@ Rancher 的主要功能如下的示意图，它可以被运行在任何云上，
 
 这三章 --[使用 Docker 原生命令行]({{site.baseurl}}/rancher/native-docker/), [使用 Rancher Compose]({{site.baseurl}}/rancher/rancher-compose), 和 [Rancher 图形界面]({{site.baseurl}}/rancher/rancher-ui/applications/stacks/adding-services/)-- 描述了使用 Rancher 功能的三种主要方式。
 
- [升级 Rancher]({{site.baseurl}}/upgrading/) 是很重要的一章，如果您在生产环境中运行 Rancher。
+[升级 Rancher]({{site.baseurl}}/upgrading/) 是很重要的一章，如果您在生产环境中运行 Rancher。
 
- [为Rancher做贡献]({{site.baseurl}}/contributing/) 这一章包含了如何参与 Rancher 开源社区的信息。
+[为Rancher做贡献]({{site.baseurl}}/contributing/) 这一章包含了如何参与 Rancher 开源社区的信息。
  
- [ Rancher OS]({{site.baseurl}}/os/rancher_os/) 完整的这种定制版容器操作系统的安装、配置和使用，在英文原始文档中和本文为平行的一份文档。为了翻译协作和使用的方便性，目前把它收录为本书的一个章节。
+[Rancher OS]({{site.baseurl}}/os/rancher_os/) 完整的这种定制版容器操作系统的安装、配置和使用，在英文原始文档中和本文为平行的一份文档。为了翻译协作和使用的方便性，目前把它收录为本书的一个章节。
