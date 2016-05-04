@@ -98,7 +98,7 @@ Rancher采用标准Docker Compose术语提供服务，并从同一Docker镜像�
 
 > *Add Service Alias - the ability to add a DNS record for your services to be discovered.*
 
-> 有关更多信息，参见添加服务，增加负载均衡器，增加外部服务或增加服务的别名搜索
+> **有关更多信息，参见添加服务，增加负载均衡器，增加外部服务或增加服务的别名搜索**
 
 > *For more information, see adding services, adding load balancers, adding external services or adding service alias.*
 
