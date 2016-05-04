@@ -119,7 +119,7 @@ $ sudo docker run -d \
 
 在 Rancher 中 [添加主机]({{site.baseurl}}/rancher/installing-rancher/add-host/) ，无需使用 HTTP 代理。
 
---
+----
 > 译者： XiaoBao Zhang
 > 
 > From： http://docs.rancher.com/rancher/installing-rancher/installing-server/
